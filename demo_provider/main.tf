@@ -23,3 +23,10 @@ resource "openstack_networking_subnet_v2" "example_subnet" {
   network_id = openstack_networking_network_v2.example_network.id
   cidr = "192.168.0.0/24"
 }
+
+resource "openstack_images_image_v2" "ubuntu_image" {
+  name            = "ubuntu-20.04"
+  image_source_url = "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img"
+  disk_format     = "qcow2"
+  container_format = "bare"
+}

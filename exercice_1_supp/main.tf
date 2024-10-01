@@ -15,7 +15,9 @@ provider "openstack" {
   insecure = true
 }
 
-
+locals {
+  vm_config_local = var.vm_config
+}
 
 resource "openstack_networking_network_v2" "exercice1_ihab_network" {
   name = "exercice1_ihab_network"
@@ -47,7 +49,7 @@ resource "openstack_compute_keypair_v2" "ihab_exercice_keypair" {
 }
 
 resource "openstack_blockstorage_volume_v3" "ihab_exerice_vol" {
-  for_each = var.vm_config 
+  for_each = {for index, vm in local.vm_config_local: vm.name => vm}
   name = "${each.value.name}-volume"
   size = each.value.volume_size
 }
@@ -55,7 +57,7 @@ resource "openstack_blockstorage_volume_v3" "ihab_exerice_vol" {
 
 # Data source to retrieve the image by name
 data "openstack_images_image_v2" "ihab_exerice_image" {
-  for_each = var.vm_config 
+  for_each = {for index, vm in local.vm_config_local: vm.name => vm}
   name = each.value.image_name
 }
 
@@ -66,12 +68,12 @@ data "openstack_images_image_v2" "ihab_exerice_image" {
 # }
 
 data "openstack_compute_flavor_v2" "exercice_ihab_flavor" {
-  for_each = var.vm_config 
+  for_each = {for index, vm in local.vm_config_local: vm.name => vm}
   name = each.value.flavor
 }
 
 resource "openstack_compute_instance_v2" "ihab_exercice_vm" {
-  for_each = var.vm_config 
+  for_each = {for index, vm in local.vm_config_local: vm.name => vm}
   name = "${each.value.name}-instance"
   image_id = data.openstack_images_image_v2.ihab_exerice_image[each.key].id
   flavor_id = data.openstack_compute_flavor_v2.exercice_ihab_flavor[each.key].id
@@ -86,7 +88,7 @@ resource "openstack_compute_instance_v2" "ihab_exercice_vm" {
 
 
 resource "openstack_compute_volume_attach_v2" "attached" {
-  for_each = var.vm_config   
+  for_each = {for index, vm in local.vm_config_local: vm.name => vm} 
   instance_id = openstack_compute_instance_v2.ihab_exercice_vm[each.key].id
   volume_id   = openstack_blockstorage_volume_v3.ihab_exerice_vol[each.key].id
 }

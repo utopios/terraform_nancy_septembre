@@ -6,8 +6,4 @@ variable "vm_config" {
     volume_size = number
     image_name = string
   }))
-
-  default = [ {
-    
-  } ]
 }

@@ -59,11 +59,11 @@ data "openstack_images_image_v2" "ihab_exerice_image" {
   name = each.value.image_name
 }
 
-# Output the image ID
-output "image_id" {
-  for_each = var.vm_config 
-  value = data.openstack_images_image_v2.ihab_exerice_image[each.key].id
-}
+# # Output the image ID
+# output "image_id" {
+#   for_each = var.vm_config 
+#   value = data.openstack_images_image_v2.ihab_exerice_image[each.key].id
+# }
 
 data "openstack_compute_flavor_v2" "exercice_ihab_flavor" {
   for_each = var.vm_config 
@@ -75,10 +75,10 @@ resource "openstack_compute_instance_v2" "ihab_exercice_vm" {
   name = "${each.value.name}-instance"
   image_id = data.openstack_images_image_v2.ihab_exerice_image[each.key].id
   flavor_id = data.openstack_compute_flavor_v2.exercice_ihab_flavor[each.key].id
-  key_pair = openstack_compute_keypair_v2.ihab-keypair.name
+  key_pair = openstack_compute_keypair_v2.ihab_exercice_keypair.name
   security_groups = ["default"]
   network {
-    uuid = openstack_networking_network_v2.example_network.id
+    uuid = openstack_networking_network_v2.exercice1_ihab_network.id
   }
 }
 

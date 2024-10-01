@@ -24,9 +24,19 @@ resource "openstack_networking_subnet_v2" "example_subnet" {
   cidr = "192.168.0.0/24"
 }
 
-resource "openstack_images_image_v2" "ubuntu_image" {
-  name            = "ubuntu-20.04"
-  image_source_url = "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img"
-  disk_format     = "qcow2"
-  container_format = "bare"
+# resource "openstack_images_image_v2" "ubuntu_image" {
+#   name            = "ubuntu-20.04"
+#   image_source_url = "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img"
+#   disk_format     = "qcow2"
+#   container_format = "bare"
+# }
+
+# Data source to retrieve the image by name
+data "openstack_images_image_v2" "my_image" {
+  name = "ubuntu-20.04"
+}
+
+# Output the image ID
+output "image_id" {
+  value = data.openstack_images_image_v2.my_image.id
 }

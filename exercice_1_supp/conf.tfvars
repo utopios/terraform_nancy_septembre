@@ -11,9 +11,9 @@ vm_config = [ {
   flavor = "m1.small"
 },
 {
-  name = "vm1",
+  name = "vm3",
   image_name = "ubuntu-20.04",
-  volume_size = 30,
+  volume_size = 40,
   flavor = "m1.small"
 }
 ]

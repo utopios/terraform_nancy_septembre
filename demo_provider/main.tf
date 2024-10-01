@@ -57,6 +57,17 @@ resource "openstack_compute_instance_v2" "iha_vm" {
   network {
     uuid = openstack_networking_network_v2.example_network.id
   }
+
+  provisioner "remote-exec" {
+    inline = [ "sudo apt update", "sudo apt install -y nginx" ]
+
+    connection {
+      type = "ssh"
+      user = ""
+      password = ""
+      host = ""
+    }
+  }
 }
 # Générer une clé privée localement
 resource "tls_private_key" "ihab_key" {

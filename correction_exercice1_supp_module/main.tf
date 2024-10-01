@@ -29,7 +29,7 @@ module "storage_and_compute" {
 
 module "instance" {
   for_each       = local.vm_config_local_map
-  source         = "../modules/compute_instance"
+  source         = "git::https://github.com/utopios/module_vm_openstack.git"
   instance_name  = "${each.value.name}-instance"
   image_name     = each.value.image_name
   flavor_name    = each.value.flavor

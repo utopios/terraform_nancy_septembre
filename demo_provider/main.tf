@@ -1,4 +1,19 @@
 terraform {
+  # backend "http" {
+  #   address = "https://api.utopios.net/?token="
+  # }
+
+  # backend "s3" {
+  #   bucket = "utopios"
+  #   access_key = "credentials"
+  # }
+
+  backend "gcs" {
+    bucket = "utopios"
+    access_token = "token"
+  }
+
+
   required_providers {
     openstack = {
         source = "terraform-provider-openstack/openstack"

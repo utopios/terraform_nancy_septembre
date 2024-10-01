@@ -17,3 +17,9 @@ vm_config = [ {
   flavor = "m1.small"
 }
 ]
+
+# vm_config = {
+#   "name" = {
+    
+#   }
+# }

@@ -1,0 +1,89 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] module.instance.data.openstack_compute_flavor_v2.flavor (expand)" [label = "module.instance.data.openstack_compute_flavor_v2.flavor", shape = "box"]
+		"[root] module.instance.data.openstack_images_image_v2.image (expand)" [label = "module.instance.data.openstack_images_image_v2.image", shape = "box"]
+		"[root] module.instance.openstack_compute_instance_v2.instance (expand)" [label = "module.instance.openstack_compute_instance_v2.instance", shape = "box"]
+		"[root] module.keypair.local_file.private_key (expand)" [label = "module.keypair.local_file.private_key", shape = "box"]
+		"[root] module.keypair.openstack_compute_keypair_v2.keypair (expand)" [label = "module.keypair.openstack_compute_keypair_v2.keypair", shape = "box"]
+		"[root] module.keypair.tls_private_key.key (expand)" [label = "module.keypair.tls_private_key.key", shape = "box"]
+		"[root] module.network.openstack_networking_network_v2.network (expand)" [label = "module.network.openstack_networking_network_v2.network", shape = "box"]
+		"[root] module.network.openstack_networking_subnet_v2.subnet (expand)" [label = "module.network.openstack_networking_subnet_v2.subnet", shape = "box"]
+		"[root] module.storage_and_compute.openstack_blockstorage_volume_v3.volume (expand)" [label = "module.storage_and_compute.openstack_blockstorage_volume_v3.volume", shape = "box"]
+		"[root] module.volume_attach.openstack_compute_volume_attach_v2.volume_attach (expand)" [label = "module.volume_attach.openstack_compute_volume_attach_v2.volume_attach", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/local\"]" [label = "provider[\"registry.terraform.io/hashicorp/local\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"]" [label = "provider[\"registry.terraform.io/hashicorp/tls\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"]" [label = "provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"]", shape = "diamond"]
+		"[root] local.vm_config_local_map (expand)" -> "[root] local.vm_config_local (expand)"
+		"[root] module.instance (close)" -> "[root] module.instance.output.instance_id (expand)"
+		"[root] module.instance (expand)" -> "[root] local.vm_config_local_map (expand)"
+		"[root] module.instance.data.openstack_compute_flavor_v2.flavor (expand)" -> "[root] module.instance.var.flavor_name (expand)"
+		"[root] module.instance.data.openstack_compute_flavor_v2.flavor (expand)" -> "[root] provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"]"
+		"[root] module.instance.data.openstack_images_image_v2.image (expand)" -> "[root] module.instance.var.image_name (expand)"
+		"[root] module.instance.data.openstack_images_image_v2.image (expand)" -> "[root] provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"]"
+		"[root] module.instance.openstack_compute_instance_v2.instance (expand)" -> "[root] module.instance.data.openstack_compute_flavor_v2.flavor (expand)"
+		"[root] module.instance.openstack_compute_instance_v2.instance (expand)" -> "[root] module.instance.data.openstack_images_image_v2.image (expand)"
+		"[root] module.instance.openstack_compute_instance_v2.instance (expand)" -> "[root] module.instance.var.instance_name (expand)"
+		"[root] module.instance.openstack_compute_instance_v2.instance (expand)" -> "[root] module.instance.var.keypair_name (expand)"
+		"[root] module.instance.openstack_compute_instance_v2.instance (expand)" -> "[root] module.instance.var.network_id (expand)"
+		"[root] module.instance.output.instance_id (expand)" -> "[root] module.instance.openstack_compute_instance_v2.instance (expand)"
+		"[root] module.instance.var.flavor_name (expand)" -> "[root] module.instance (expand)"
+		"[root] module.instance.var.image_name (expand)" -> "[root] module.instance (expand)"
+		"[root] module.instance.var.instance_name (expand)" -> "[root] module.instance (expand)"
+		"[root] module.instance.var.keypair_name (expand)" -> "[root] module.instance (expand)"
+		"[root] module.instance.var.keypair_name (expand)" -> "[root] module.keypair.output.keypair_name (expand)"
+		"[root] module.instance.var.network_id (expand)" -> "[root] module.instance (expand)"
+		"[root] module.instance.var.network_id (expand)" -> "[root] module.network.output.network_id (expand)"
+		"[root] module.keypair (close)" -> "[root] module.keypair.local_file.private_key (expand)"
+		"[root] module.keypair (close)" -> "[root] module.keypair.output.keypair_name (expand)"
+		"[root] module.keypair.local_file.private_key (expand)" -> "[root] module.keypair.tls_private_key.key (expand)"
+		"[root] module.keypair.local_file.private_key (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/local\"]"
+		"[root] module.keypair.openstack_compute_keypair_v2.keypair (expand)" -> "[root] module.keypair.tls_private_key.key (expand)"
+		"[root] module.keypair.openstack_compute_keypair_v2.keypair (expand)" -> "[root] module.keypair.var.keypair_name (expand)"
+		"[root] module.keypair.openstack_compute_keypair_v2.keypair (expand)" -> "[root] provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"]"
+		"[root] module.keypair.output.keypair_name (expand)" -> "[root] module.keypair.openstack_compute_keypair_v2.keypair (expand)"
+		"[root] module.keypair.tls_private_key.key (expand)" -> "[root] module.keypair (expand)"
+		"[root] module.keypair.tls_private_key.key (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"]"
+		"[root] module.keypair.var.keypair_name (expand)" -> "[root] module.keypair (expand)"
+		"[root] module.network (close)" -> "[root] module.network.output.network_id (expand)"
+		"[root] module.network (close)" -> "[root] module.network.output.subnet_id (expand)"
+		"[root] module.network.openstack_networking_network_v2.network (expand)" -> "[root] module.network.var.network_name (expand)"
+		"[root] module.network.openstack_networking_network_v2.network (expand)" -> "[root] provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"]"
+		"[root] module.network.openstack_networking_subnet_v2.subnet (expand)" -> "[root] module.network.openstack_networking_network_v2.network (expand)"
+		"[root] module.network.openstack_networking_subnet_v2.subnet (expand)" -> "[root] module.network.var.cidr (expand)"
+		"[root] module.network.openstack_networking_subnet_v2.subnet (expand)" -> "[root] module.network.var.subnet_name (expand)"
+		"[root] module.network.output.network_id (expand)" -> "[root] module.network.openstack_networking_network_v2.network (expand)"
+		"[root] module.network.output.subnet_id (expand)" -> "[root] module.network.openstack_networking_subnet_v2.subnet (expand)"
+		"[root] module.network.var.cidr (expand)" -> "[root] module.network (expand)"
+		"[root] module.network.var.network_name (expand)" -> "[root] module.network (expand)"
+		"[root] module.network.var.subnet_name (expand)" -> "[root] module.network (expand)"
+		"[root] module.storage_and_compute (close)" -> "[root] module.storage_and_compute.output.volume_id (expand)"
+		"[root] module.storage_and_compute (expand)" -> "[root] local.vm_config_local_map (expand)"
+		"[root] module.storage_and_compute.openstack_blockstorage_volume_v3.volume (expand)" -> "[root] module.storage_and_compute.var.volume_name (expand)"
+		"[root] module.storage_and_compute.openstack_blockstorage_volume_v3.volume (expand)" -> "[root] module.storage_and_compute.var.volume_size (expand)"
+		"[root] module.storage_and_compute.openstack_blockstorage_volume_v3.volume (expand)" -> "[root] provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"]"
+		"[root] module.storage_and_compute.output.volume_id (expand)" -> "[root] module.storage_and_compute.openstack_blockstorage_volume_v3.volume (expand)"
+		"[root] module.storage_and_compute.var.volume_name (expand)" -> "[root] module.storage_and_compute (expand)"
+		"[root] module.storage_and_compute.var.volume_size (expand)" -> "[root] module.storage_and_compute (expand)"
+		"[root] module.volume_attach (close)" -> "[root] module.volume_attach.openstack_compute_volume_attach_v2.volume_attach (expand)"
+		"[root] module.volume_attach (expand)" -> "[root] local.vm_config_local_map (expand)"
+		"[root] module.volume_attach.openstack_compute_volume_attach_v2.volume_attach (expand)" -> "[root] module.volume_attach.var.instance_id (expand)"
+		"[root] module.volume_attach.openstack_compute_volume_attach_v2.volume_attach (expand)" -> "[root] module.volume_attach.var.volume_id (expand)"
+		"[root] module.volume_attach.var.instance_id (expand)" -> "[root] module.instance (close)"
+		"[root] module.volume_attach.var.instance_id (expand)" -> "[root] module.volume_attach (expand)"
+		"[root] module.volume_attach.var.volume_id (expand)" -> "[root] module.storage_and_compute (close)"
+		"[root] module.volume_attach.var.volume_id (expand)" -> "[root] module.volume_attach (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/local\"] (close)" -> "[root] module.keypair.local_file.private_key (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)" -> "[root] module.keypair.tls_private_key.key (expand)"
+		"[root] provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"] (close)" -> "[root] module.network.openstack_networking_subnet_v2.subnet (expand)"
+		"[root] provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"] (close)" -> "[root] module.volume_attach.openstack_compute_volume_attach_v2.volume_attach (expand)"
+		"[root] root" -> "[root] module.keypair (close)"
+		"[root] root" -> "[root] module.network (close)"
+		"[root] root" -> "[root] module.volume_attach (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/local\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"] (close)"
+	}
+}
+
